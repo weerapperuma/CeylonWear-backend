@@ -1,29 +1,20 @@
 {
-  "name": "ceylonhope-foundation-backend",
-  "version": "0.0.0",
-  "private": true,
+  "name": "ceylonwear-backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
-  "dependencies": {
-    "@prisma/client": "^6.3.1",
-    "@types/express": "^5.0.0",
-    "cookie-parser": "~1.4.4",
-    "debug": "~2.6.9",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "morgan": "~1.9.1",
-    "prisma": "^6.3.1",
-    "pug": "2.0.0-beta11",
-    "tsx": "^4.19.2",
-    "typescript": "^5.7.3"
-  },
-  "main": "app.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
-  "devDependencies": {
-    "@types/node": "^22.13.1"
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mongodb": "^6.13.1",
+    "mongoose": "^8.11.0",
+    "nodemon": "^3.1.9"
   }
 }
