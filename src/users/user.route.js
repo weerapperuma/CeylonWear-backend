@@ -1,5 +1,6 @@
 const express = require('express');
 const User = require('./user.model');
+const generateToken = require("../middleware/generateToken");
 const router = express.Router();
 
 // Registration Route
@@ -32,7 +33,7 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
         const { email, password } = req.body;
-        const user = await User.findOne({ email });
+        const user = await User.findOne({email});
 
         if (!user) {
             return res.status(404).send({ message: "User not found" });
@@ -42,8 +43,24 @@ router.post('/login', async (req, res) => {
         if (!isMatch) {
             return res.status(401).send({ message: "Invalid credentials" });
         }
+        const token = await generateToken(user._id);
+        res.cookie("token", token,{
+            httpOnly:true,
+            secure: true,
+            sameSite: "none",
+        });
 
-        res.status(200).send({ message: "Logged in successfully!", user });
+        res.status(200).send({
+            message: "Logged in successfully!", user:{
+                _id: user._id,
+                email: user.email,
+                username: user.username,
+                role: user.role,
+                profileImage: user.profileImage,
+                bio: user.bio,
+                profession: user.profession
+            }
+        });
     } catch (error) {
         console.error("Login error:", error);
         res.status(500).send({ message: "Internal server error" });
