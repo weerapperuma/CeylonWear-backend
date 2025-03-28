@@ -1,4 +1,5 @@
 const express = require("express");
+const Order = require("./orders.model");
 const router = express.Router();
 const stripe = require('stripe')(process.env.STRIP_SECRET_KEY);
 
